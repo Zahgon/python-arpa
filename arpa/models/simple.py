@@ -19,17 +19,13 @@ class ARPAModelSimple(ARPAModel):
         return word in self.vocabulary(sort=False)
 
     def add_count(self, order, count):
-        self._counts[order] = count
+        pass
 
     def add_entry(self, ngram, p, bo=None, order=None):
-        if self._vocabulary is not None:
-            raise FrozenException
-        self._ps[ngram] = p
-        if bo is not None:
-            self._bos[ngram] = bo
+        pass
 
     def counts(self):
-        return sorted(self._counts.items())
+        pass
 
     def order(self):
         pass
@@ -38,13 +34,10 @@ class ARPAModelSimple(ARPAModel):
         pass
 
     def _entries(self, order):
-        return (self._entry(k) for k in self._ps.keys() if len(k) == order)
+        pass
 
     def _entry(self, ngram):
-        if ngram in self._bos:
-            return self._ps[ngram], ngram, self._bos[ngram]
-        else:
-            return self._ps[ngram], ngram
+        pass
 
     def _log_bo(self, ngram):
         pass

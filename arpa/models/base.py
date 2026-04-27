@@ -53,24 +53,7 @@ class ARPAModel(metaclass=ABCMeta):
         pass
 
     def write(self, fp):
-        fp.write('\n\\data\\\n')
-        for order, count in self.counts():
-            fp.write('ngram {}={}\n'.format(order, count))
-        fp.write('\n')
-        for order, _ in self.counts():
-            fp.write('\\{}-grams:\n'.format(order))
-            for e in self._entries(order):
-                prob = e[0]
-                ngram = ' '.join(e[1])
-                if len(e) == 2:
-                    fp.write('{}\t{}\n'.format(prob, ngram))
-                elif len(e) == 3:
-                    backoff = e[2]
-                    fp.write('{}\t{}\t{}\n'.format(prob, ngram, backoff))
-                else:
-                    raise ValueError
-            fp.write('\n')
-        fp.write('\\end\\\n')
+        pass
 
     @abstractmethod
     def _entries(self, order):  # pragma: no cover

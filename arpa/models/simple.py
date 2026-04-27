@@ -32,16 +32,10 @@ class ARPAModelSimple(ARPAModel):
         return sorted(self._counts.items())
 
     def order(self):
-        return max(self._counts.keys(), default=None)
+        pass
 
     def vocabulary(self, sort=True):
-        if self._vocabulary is None:
-            self._vocabulary = set(word for ngram in self._ps.keys() for word in ngram)
-            self._vocabulary_sorted = sorted(self._vocabulary)
-        if sort:
-            return self._vocabulary_sorted
-        else:
-            return self._vocabulary
+        pass
 
     def _entries(self, order):
         return (self._entry(k) for k in self._ps.keys() if len(k) == order)
@@ -53,7 +47,7 @@ class ARPAModelSimple(ARPAModel):
             return self._ps[ngram], ngram
 
     def _log_bo(self, ngram):
-        return self._bos[ngram]
+        pass
 
     def _log_p(self, ngram):
-        return self._ps[ngram]
+        pass

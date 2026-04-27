@@ -26,42 +26,19 @@ class ARPAModel(metaclass=ABCMeta):
         pass
 
     def log_p(self, ngram):
-        words = self._check_input(ngram)
-        if self._unk:
-            words = self._replace_unks(words)
-        return self.log_p_raw(words)
+        pass
 
     def log_p_raw(self, ngram):
-        try:
-            return self._log_p(ngram)
-        except KeyError:
-            if len(ngram) == 1:
-                raise KeyError
-            else:
-                try:
-                    log_bo = self._log_bo(ngram[:-1])
-                except KeyError:
-                    log_bo = 0
-                return log_bo + self.log_p_raw(ngram[1:])
+        pass
 
     def log_s(self, sentence, sos=SOS, eos=EOS):
-        words = self._check_input(sentence)
-        if self._unk:
-            words = self._replace_unks(words)
-        if sos:
-            words = (sos, ) + words
-        if eos:
-            words = words + (eos, )
-        result = sum(self.log_p_raw(words[:i]) for i in range(1, len(words) + 1))
-        if sos:
-            result = result - self.log_p_raw(words[:1])
-        return result
+        pass
 
     def p(self, ngram):
-        return self._base**self.log_p(ngram)
+        pass
 
     def s(self, sentence):
-        return self._base**self.log_s(sentence)
+        pass
 
     @abstractmethod
     def counts(self):  # pragma: no cover
@@ -109,23 +86,11 @@ class ARPAModel(metaclass=ABCMeta):
 
     @staticmethod
     def _check_input(input):
-        if not input:
-            raise ValueError
-        elif isinstance(input, tuple):
-            return input
-        elif isinstance(input, list):
-            return tuple(input)
-        elif isinstance(input, str):
-            return tuple(input.strip().split(' '))
-        else:
-            raise ValueError
+        pass
 
     @staticmethod
     def _check_word(input):
-        if not isinstance(input, str):
-            raise ValueError
-        if ' ' in input:
-            raise ValueError
+        pass
 
     def _replace_unks(self, words):
-        return tuple((w if w in self else self._unk) for w in words)
+        pass
